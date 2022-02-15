@@ -34,10 +34,10 @@
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.listBoxArray = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.textBoxCategory = new System.Windows.Forms.TextBox();
+            this.textBoxStructure = new System.Windows.Forms.TextBox();
+            this.textBoxDefinition = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -97,44 +97,46 @@
             this.listBoxArray.Name = "listBoxArray";
             this.listBoxArray.Size = new System.Drawing.Size(181, 277);
             this.listBoxArray.TabIndex = 5;
+            this.listBoxArray.SelectedIndexChanged += new System.EventHandler(this.listBoxArray_SelectedIndexChanged);
             // 
-            // textBox1
+            // textBoxName
             // 
-            this.textBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.textBox1.Location = new System.Drawing.Point(22, 47);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(137, 20);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "Name";
+            this.textBoxName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.textBoxName.Location = new System.Drawing.Point(22, 47);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.ReadOnly = true;
+            this.textBoxName.Size = new System.Drawing.Size(137, 20);
+            this.textBoxName.TabIndex = 6;
+            this.textBoxName.Text = "Name";
+            this.textBoxName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxName_MouseDoubleClick);
             // 
-            // textBox2
+            // textBoxCategory
             // 
-            this.textBox2.Location = new System.Drawing.Point(22, 73);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(137, 20);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.Text = "Category";
+            this.textBoxCategory.Location = new System.Drawing.Point(22, 73);
+            this.textBoxCategory.Name = "textBoxCategory";
+            this.textBoxCategory.ReadOnly = true;
+            this.textBoxCategory.Size = new System.Drawing.Size(137, 20);
+            this.textBoxCategory.TabIndex = 7;
+            this.textBoxCategory.Text = "Category";
             // 
-            // textBox3
+            // textBoxStructure
             // 
-            this.textBox3.Location = new System.Drawing.Point(22, 99);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(137, 20);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.Text = "Structure";
+            this.textBoxStructure.Location = new System.Drawing.Point(22, 99);
+            this.textBoxStructure.Name = "textBoxStructure";
+            this.textBoxStructure.ReadOnly = true;
+            this.textBoxStructure.Size = new System.Drawing.Size(137, 20);
+            this.textBoxStructure.TabIndex = 8;
+            this.textBoxStructure.Text = "Structure";
             // 
-            // textBox4
+            // textBoxDefinition
             // 
-            this.textBox4.Location = new System.Drawing.Point(22, 125);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(137, 166);
-            this.textBox4.TabIndex = 9;
-            this.textBox4.Text = "Definition";
+            this.textBoxDefinition.Location = new System.Drawing.Point(22, 125);
+            this.textBoxDefinition.Multiline = true;
+            this.textBoxDefinition.Name = "textBoxDefinition";
+            this.textBoxDefinition.ReadOnly = true;
+            this.textBoxDefinition.Size = new System.Drawing.Size(137, 166);
+            this.textBoxDefinition.TabIndex = 9;
+            this.textBoxDefinition.Text = "Definition";
             // 
             // label1
             // 
@@ -173,10 +175,10 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonOpen);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxDefinition);
+            this.Controls.Add(this.textBoxStructure);
+            this.Controls.Add(this.textBoxCategory);
+            this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.listBoxArray);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
@@ -198,10 +200,10 @@
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.ListBox listBoxArray;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.TextBox textBoxCategory;
+        private System.Windows.Forms.TextBox textBoxStructure;
+        private System.Windows.Forms.TextBox textBoxDefinition;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonOpen;
         private System.Windows.Forms.Button buttonSave;
