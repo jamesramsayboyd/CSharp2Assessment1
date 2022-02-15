@@ -57,6 +57,13 @@ namespace CSharp2Assessment1
             }
         }
 
+        public void swap(string a, string b)
+        {
+            string temp = a;
+            a = b;
+            b = temp;
+        }
+
         // Q8.4 A Bubble Sort method to sort the 2D array by Name ascending
         public void bubbleSort()
         {
@@ -68,22 +75,15 @@ namespace CSharp2Assessment1
                     {
                         for (int j = 0; j < colSize; j++)
                         {
-                            if (string.Compare(myArray[i, j], myArray[x, y]) > 0))
+                            if (string.Compare(myArray[i, j], myArray[x, y]) > 0)
                             {
-                                swap(myArray, x, y, i, j);
+                                swap(myArray[x, y], myArray[i, j]);
                             }
                         }
                     }
                 }
             }
             displayArray();
-        }
-
-        public void swap(String[] a, int x, int y, int i, int j)
-        {
-            int temp = a[x, y];
-            a[x, y] = a[i, j];
-            a[i, j] = temp;
         }
 
         // Q8.5 A Binary Search method for the Name in the 2D array, displaying information
