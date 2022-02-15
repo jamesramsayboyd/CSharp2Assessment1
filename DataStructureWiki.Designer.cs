@@ -33,7 +33,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxArray = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -58,6 +58,7 @@
             this.buttonSearch.TabIndex = 1;
             this.buttonSearch.Text = "SEARCH";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // buttonAdd
             // 
@@ -67,6 +68,7 @@
             this.buttonAdd.TabIndex = 2;
             this.buttonAdd.Text = "ADD";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonEdit
             // 
@@ -76,6 +78,7 @@
             this.buttonEdit.TabIndex = 3;
             this.buttonEdit.Text = "EDIT";
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonDelete
             // 
@@ -85,14 +88,15 @@
             this.buttonDelete.TabIndex = 4;
             this.buttonDelete.Text = "DELETE";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
-            // listBox1
+            // listBoxArray
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(178, 53);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(181, 277);
-            this.listBox1.TabIndex = 5;
+            this.listBoxArray.FormattingEnabled = true;
+            this.listBoxArray.Location = new System.Drawing.Point(178, 53);
+            this.listBoxArray.Name = "listBoxArray";
+            this.listBoxArray.Size = new System.Drawing.Size(181, 277);
+            this.listBoxArray.TabIndex = 5;
             // 
             // textBox1
             // 
@@ -149,6 +153,7 @@
             this.buttonOpen.TabIndex = 11;
             this.buttonOpen.Text = "OPEN";
             this.buttonOpen.UseVisualStyleBackColor = true;
+            this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
             // buttonSave
             // 
@@ -158,6 +163,7 @@
             this.buttonSave.TabIndex = 12;
             this.buttonSave.Text = "SAVE";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // DataStructureWiki
             // 
@@ -171,7 +177,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listBoxArray);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
@@ -191,7 +197,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxArray;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
