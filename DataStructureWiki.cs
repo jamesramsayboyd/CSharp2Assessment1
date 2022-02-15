@@ -12,9 +12,9 @@ namespace CSharp2Assessment1
 {
     // Test
     // Test 2
-    public partial class Form1 : Form
+    public partial class DataStructureWiki : Form
     {
-        public Form1()
+        public DataStructureWiki()
         {
             InitializeComponent();
         }
