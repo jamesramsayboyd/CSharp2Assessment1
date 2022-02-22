@@ -24,6 +24,10 @@ namespace CSharp2Assessment1
         public DataStructureWiki()
         {
             InitializeComponent();
+        }
+
+        private void buttonInitialise_Click(object sender, EventArgs e)
+        {
             InitializeArray();
         }
 
@@ -52,6 +56,7 @@ namespace CSharp2Assessment1
             myArray[nextEmptyRow, 3] = textBoxDefinition.Text;
             nextEmptyRow++;
             DisplayArray();
+            toolStripStatusLabel.Text = "Entry added";
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -61,6 +66,7 @@ namespace CSharp2Assessment1
             myArray[listBoxArray.SelectedIndex, 2] = textBoxStructure.Text;
             myArray[listBoxArray.SelectedIndex, 3] = textBoxDefinition.Text;
             DisplayArray();
+            toolStripStatusLabel.Text = "Entry edited";
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -71,57 +77,70 @@ namespace CSharp2Assessment1
             }
             nextEmptyRow--;
             DisplayArray();
+            toolStripStatusLabel.Text = "Entry deleted";
         }
         #endregion ADD EDIT DELETE
 
 
         // Q8.3	Create a CLEAR method to clear the four text boxes so a new definition can be added
+        #region CLEAR
         private void textBoxName_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            textBoxName.Clear();
-            textBoxName.ReadOnly = false;
-            textBoxCategory.Clear();
-            textBoxCategory.ReadOnly = false;
-            textBoxStructure.Clear();
-            textBoxStructure.ReadOnly = false;
-            textBoxDefinition.Clear();
-            textBoxDefinition.ReadOnly = false;
+            ClearTextBoxes();
         }
+
+        private void ClearTextBoxes()
+        {
+            textBoxName.Clear();
+            textBoxCategory.Clear();
+            textBoxStructure.Clear();
+            textBoxDefinition.Clear();
+        }
+
+        // A double mouse click in the search text box will clear the search input box
+        private void textBoxSearch_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            textBoxSearch.Clear();
+        }
+        #endregion CLEAR
 
 
         // Q8.4 A Bubble Sort method to sort the 2D array by Name ascending
-        public void bubbleSort()
+        #region SORT
+        private void buttonSort_Click(object sender, EventArgs e)
         {
-            for (int x = 0; x < rowSize; x++)
+            BubbleSort();
+        }
+
+        public void BubbleSort()
+        {
+            for (int i = 0; i < nextEmptyRow; i++)
             {
-                for (int y = 0; y < colSize; y++)
+                for (int j = i + 1; j < nextEmptyRow; j++)
                 {
-                    for (int i = 0; i < rowSize; i++)
+                    if (string.Compare(myArray[i, 0], myArray[j, 0]) > 0)
                     {
-                        for (int j = 0; j < colSize; j++)
-                        {
-                            if (string.Compare(myArray[i, j], myArray[x, y]) > 0)
-                            {
-                                swap(myArray[x, y], myArray[i, j]);
-                            }
-                        }
+                        Swap(myArray[i, 0], myArray[j, 0]);
                     }
                 }
             }
             DisplayArray();
+            toolStripStatusLabel.Text = "Data sorted by Name ascending";
         }
-        public void swap(string a, string b)
+        public void Swap(string a, string b)
         {
             string temp = a;
             a = b;
             b = temp;
         }
+        #endregion SORT
 
 
         // Q8.5 A Binary Search method for the Name in the 2D array, displaying information
         // in textboxes when found, with appropriate user feedback
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            BubbleSort();
             //int target = int.Parse(textBoxSearch.Text);
             //int row1 = 0;
             //int col1 = colSize - 1;
@@ -152,10 +171,8 @@ namespace CSharp2Assessment1
         public void DisplayArray()
         {
             listBoxArray.Items.Clear();
-            //listBoxArray.Items.Add("  Name      Category");
             for (int x = 0; x < rowSize; x++)
             {
-                //listBoxArray.Items.Add(" ");
                 string nameCategory = "";
                 for (int y = 0; y < 2; y++)
                 {
@@ -246,5 +263,6 @@ namespace CSharp2Assessment1
             DisplayArray();
         }
         #endregion Save/Open
+
     }
 }

@@ -47,6 +47,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.buttonSort = new System.Windows.Forms.Button();
+            this.buttonInitialise = new System.Windows.Forms.Button();
+            this.stripStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxSearch
@@ -55,6 +59,7 @@
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(100, 20);
             this.textBoxSearch.TabIndex = 0;
+            this.textBoxSearch.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSearch_MouseDoubleClick);
             // 
             // buttonSearch
             // 
@@ -101,7 +106,7 @@
             this.listBoxArray.FormattingEnabled = true;
             this.listBoxArray.Location = new System.Drawing.Point(178, 79);
             this.listBoxArray.Name = "listBoxArray";
-            this.listBoxArray.Size = new System.Drawing.Size(181, 264);
+            this.listBoxArray.Size = new System.Drawing.Size(181, 238);
             this.listBoxArray.TabIndex = 5;
             this.listBoxArray.SelectedIndexChanged += new System.EventHandler(this.listBoxArray_SelectedIndexChanged);
             // 
@@ -167,7 +172,9 @@
             // 
             // stripStatus
             // 
-            this.stripStatus.Location = new System.Drawing.Point(0, 398);
+            this.stripStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.stripStatus.Location = new System.Drawing.Point(0, 396);
             this.stripStatus.Name = "stripStatus";
             this.stripStatus.Size = new System.Drawing.Size(380, 22);
             this.stripStatus.TabIndex = 13;
@@ -218,11 +225,39 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "Definition";
             // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabel.Text = "-";
+            // 
+            // buttonSort
+            // 
+            this.buttonSort.Location = new System.Drawing.Point(178, 327);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(75, 23);
+            this.buttonSort.TabIndex = 19;
+            this.buttonSort.Text = "SORT";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
+            // 
+            // buttonInitialise
+            // 
+            this.buttonInitialise.Location = new System.Drawing.Point(284, 327);
+            this.buttonInitialise.Name = "buttonInitialise";
+            this.buttonInitialise.Size = new System.Drawing.Size(75, 23);
+            this.buttonInitialise.TabIndex = 20;
+            this.buttonInitialise.Text = "Initialise";
+            this.buttonInitialise.UseVisualStyleBackColor = true;
+            this.buttonInitialise.Click += new System.EventHandler(this.buttonInitialise_Click);
+            // 
             // DataStructureWiki
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 420);
+            this.ClientSize = new System.Drawing.Size(380, 418);
+            this.Controls.Add(this.buttonInitialise);
+            this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -244,6 +279,8 @@
             this.Controls.Add(this.textBoxSearch);
             this.Name = "DataStructureWiki";
             this.Text = "Data Structure Wiki";
+            this.stripStatus.ResumeLayout(false);
+            this.stripStatus.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,6 +307,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.Button buttonSort;
+        private System.Windows.Forms.Button buttonInitialise;
     }
 }
 
