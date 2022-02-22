@@ -42,12 +42,12 @@
             this.buttonOpen = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.stripStatus = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonSort = new System.Windows.Forms.Button();
             this.buttonInitialise = new System.Windows.Forms.Button();
             this.stripStatus.SuspendLayout();
@@ -180,6 +180,12 @@
             this.stripStatus.TabIndex = 13;
             this.stripStatus.Text = "-";
             // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabel.Text = "-";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -224,12 +230,6 @@
             this.label6.Size = new System.Drawing.Size(51, 13);
             this.label6.TabIndex = 18;
             this.label6.Text = "Definition";
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(12, 17);
-            this.toolStripStatusLabel.Text = "-";
             // 
             // buttonSort
             // 

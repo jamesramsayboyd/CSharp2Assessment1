@@ -17,8 +17,8 @@ namespace CSharp2Assessment1
         // Q8.1 Global 2D Array of type String using static variables for dimensions
         static int rowSize = 12; 
         static int colSize = 4;
-        static String[,] myArray = new String[rowSize, colSize];
-        string fileName = "definitions.dat";
+        static string[,] myArray = new string[rowSize, colSize];
+        string defaultFileName = "definitions.dat";
         int nextEmptyRow = 0;
 
         public DataStructureWiki()
@@ -180,6 +180,14 @@ namespace CSharp2Assessment1
                 }
                 listBoxArray.Items.Add(nameCategory);
             }
+
+            //listBoxArray.Items.Clear();
+            //for (int x = 0; x < rowSize; x++)
+            //{
+            //    ListViewItem lvi = new ListViewItem(myArray[x, 0]);
+            //    lvi.SubItems.Add(myArray[x, 1]);
+            //    listBoxArray.Items.Add(lvi);
+            //}
         }
 
 
@@ -194,57 +202,33 @@ namespace CSharp2Assessment1
         }
 
 
-        #region Save/Open
+
         // Q8.8 Create a SAVE button so the information from the 2D array can be written into
         // a binary file called definitions.dat which is sorted by Name
+        #region SAVE
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            //SaveFileDialog SaveText = new SaveFileDialog();
-            //DialogResult sr = SaveText.ShowDialog();
-            //if (sr == DialogResult.OK)
-            //{
-            //    fileName = SaveText.FileName;
-            //}
-            //if (sr == DialogResult.Cancel)
-            //{
-            //    SaveText.FileName = fileName;
-            //}
-            // Validate file name and increment
-            try
+            SaveFileDialog saveFileDialogVG = new SaveFileDialog();
+            saveFileDialogVG.Filter = "DAT file|*.dat";
+            saveFileDialogVG.Title = "Save a DAT File";
+            saveFileDialogVG.DefaultExt = ".dat";
+            //saveFileDialogVG.InitialDirectory = ToString();
+            saveFileDialogVG.ShowDialog();
+            string fileName = saveFileDialogVG.FileName;
+            if (saveFileDialogVG.FileName != "")
             {
-                using (Stream stream = File.Open(fileName, FileMode.Create))
-                {
-                    BinaryFormatter bin = new BinaryFormatter();
-                    for (int y = 0; y < colSize; y++)
-                    {
-                        for (int x = 0; x < rowSize; x++)
-                        {
-                            bin.Serialize(stream, myArray[x, y]);
-                        }
-                    }
-                }
-                stripStatus.Text = "Data saved to file";
+                saveRecord(fileName);
             }
-            catch (IOException)
+            else
             {
-                stripStatus.Text = "ERROR: Cannot save file";
+                saveRecord(defaultFileName);
             }
         }
-
-        // Q8.9 Create an OPEN button that will read the information from a binary file called
-        // definitions.dat into the 2D array
-        private void buttonOpen_Click(object sender, EventArgs e)
+        private void saveRecord(string saveFileName)
         {
-            //string openFileName = "";
-            OpenFileDialog OpenText = new OpenFileDialog();
-            DialogResult sr = OpenText.ShowDialog();
-            //if (sr == DialogResult.OK)
-            //{
-            //    openFileName = OpenText.FileName;
-            //}    
             try
             {
-                using (Stream stream = File.Open(fileName, FileMode.Create))
+                using (Stream stream = File.Open(saveFileName, FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
                     for (int y = 0; y < colSize; y++)
@@ -260,9 +244,44 @@ namespace CSharp2Assessment1
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+        #endregion SAVE
+
+        // Q8.9 Create an OPEN button that will read the information from a binary file called
+        // definitions.dat into the 2D array
+        #region OPEN
+        private void buttonOpen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialogVG = new OpenFileDialog();
+            openFileDialogVG.Filter = "DAT Files|*.dat";
+            openFileDialogVG.Title = "Select a DAT File";
+            if (openFileDialogVG.ShowDialog() == DialogResult.OK)
+            {
+                openRecord(openFileDialogVG.FileName);
+            }
+        }
+        private void openRecord(string openFileName)
+        {
+            try
+            {
+                using (Stream stream = File.Open(openFileName, FileMode.Open))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    for (int y = 0; y < colSize; y++)
+                    {
+                        for (int x = 0; x < rowSize; x++)
+                        {
+                            myArray[x, y] = (string)bin.Deserialize(stream);
+                        }
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             DisplayArray();
         }
-        #endregion Save/Open
-
+        #endregion OPEN
     }
 }
