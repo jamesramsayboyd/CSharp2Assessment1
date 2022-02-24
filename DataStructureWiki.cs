@@ -15,7 +15,7 @@ namespace CSharp2Assessment1
     public partial class DataStructureWiki : Form
     {
         // Q8.1 Global 2D Array of type String using static variables for dimensions
-        static int rowSize = 12; 
+        static int rowSize = 12;
         static int colSize = 4;
         static string[,] myArray = new string[rowSize, colSize];
         string defaultFileName = "definitions.dat";
@@ -114,24 +114,31 @@ namespace CSharp2Assessment1
 
         public void BubbleSort()
         {
-            for (int i = 0; i < nextEmptyRow; i++)
+            for (int i = 0; i < nextEmptyRow - 1; i++)
             {
                 for (int j = i + 1; j < nextEmptyRow; j++)
                 {
                     if (string.Compare(myArray[i, 0], myArray[j, 0]) > 0)
                     {
-                        Swap(myArray[i, 0], myArray[j, 0]);
+                        for (int k = 0; k < colSize; k++)
+                        {
+                            Swap(myArray, i, j, k);
+                        }
                     }
                 }
             }
             DisplayArray();
             toolStripStatusLabel.Text = "Data sorted by Name ascending";
         }
-        public void Swap(string a, string b)
+
+        // Swap function creates a temp 2D array, for loop iterates through all four columns
+        // of data swapping each element
+        public void Swap(string[,] x, int a, int b, int k)
         {
-            string temp = a;
-            a = b;
-            b = temp;
+            string[,] temp = new string[1, colSize];
+            temp[0, k] = x[a, k];
+            x[a, k] = x[b, k];
+            x[b, k] = temp[0, k];
         }
         #endregion SORT
 
@@ -170,24 +177,25 @@ namespace CSharp2Assessment1
         // in a List box: Name and Category,
         public void DisplayArray()
         {
-            listBoxArray.Items.Clear();
-            for (int x = 0; x < rowSize; x++)
-            {
-                string nameCategory = "";
-                for (int y = 0; y < 2; y++)
-                {
-                    nameCategory = nameCategory + "   " + myArray[x, y];
-                }
-                listBoxArray.Items.Add(nameCategory);
-            }
-
             //listBoxArray.Items.Clear();
             //for (int x = 0; x < rowSize; x++)
             //{
-            //    ListViewItem lvi = new ListViewItem(myArray[x, 0]);
-            //    lvi.SubItems.Add(myArray[x, 1]);
-            //    listBoxArray.Items.Add(lvi);
+            //    string nameCategory = "";
+            //    for (int y = 0; y < 2; y++)
+            //    {
+            //        nameCategory = nameCategory + "   " + myArray[x, y];
+            //    }
+            //    listBoxArray.Items.Add(nameCategory);
             //}
+
+            listViewArray.Items.Clear();
+            for (int x = 0; x < rowSize; x++)
+            {
+                ListViewItem lvi = new ListViewItem(myArray[x, 0]);
+                lvi.SubItems.Add(myArray[x, 1]);
+                listViewArray.Items.Add(lvi);
+            }
+
         }
 
 
@@ -199,6 +207,15 @@ namespace CSharp2Assessment1
             textBoxCategory.Text = myArray[listBoxArray.SelectedIndex, 1].ToString();
             textBoxStructure.Text = myArray[listBoxArray.SelectedIndex, 2].ToString();
             textBoxDefinition.Text = myArray[listBoxArray.SelectedIndex, 3].ToString();
+        }
+
+        private void listViewArray_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //ListViewItem lvi = new ListViewItem(listViewArray.Items);
+            //lvi.SubItems.Add(listViewArray.SelectedItems);
+
+            //textBoxName.Text = myArray[listViewArray.SelectedIndices, 0].ToString();
+            //listViewArray.
         }
 
 
@@ -238,6 +255,14 @@ namespace CSharp2Assessment1
                             bin.Serialize(stream, myArray[x, y]);
                         }
                     }
+                    //BinaryFormatter bin = new BinaryFormatter();
+                    //for (int x = 0; x < rowSize; x++)
+                    //{
+                    //    for (int y = 0; y < colSize; y++)
+                    //    {
+                    //        bin.Serialize(stream, myArray[x, y]);
+                    //    }
+                    //}
                 }
             }
             catch (IOException ex)
@@ -273,6 +298,8 @@ namespace CSharp2Assessment1
                         {
                             myArray[x, y] = (string)bin.Deserialize(stream);
                         }
+                        // this is no good. Open function gets axes around the wrong way
+                        nextEmptyRow += 3;
                     }
                 }
             }

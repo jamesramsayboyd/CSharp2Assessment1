@@ -50,6 +50,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.buttonSort = new System.Windows.Forms.Button();
             this.buttonInitialise = new System.Windows.Forms.Button();
+            this.listViewArray = new System.Windows.Forms.ListView();
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.stripStatus.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -176,7 +179,7 @@
             this.toolStripStatusLabel});
             this.stripStatus.Location = new System.Drawing.Point(0, 396);
             this.stripStatus.Name = "stripStatus";
-            this.stripStatus.Size = new System.Drawing.Size(380, 22);
+            this.stripStatus.Size = new System.Drawing.Size(620, 22);
             this.stripStatus.TabIndex = 13;
             this.stripStatus.Text = "-";
             // 
@@ -251,11 +254,38 @@
             this.buttonInitialise.UseVisualStyleBackColor = true;
             this.buttonInitialise.Click += new System.EventHandler(this.buttonInitialise_Click);
             // 
+            // listViewArray
+            // 
+            this.listViewArray.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderName,
+            this.columnHeaderCategory});
+            this.listViewArray.HideSelection = false;
+            this.listViewArray.Location = new System.Drawing.Point(392, 79);
+            this.listViewArray.Name = "listViewArray";
+            this.listViewArray.Size = new System.Drawing.Size(176, 238);
+            this.listViewArray.TabIndex = 21;
+            this.listViewArray.UseCompatibleStateImageBehavior = false;
+            this.listViewArray.View = System.Windows.Forms.View.Details;
+            this.listViewArray.SelectedIndexChanged += new System.EventHandler(this.listViewArray_SelectedIndexChanged);
+            // 
+            // columnHeaderName
+            // 
+            this.columnHeaderName.DisplayIndex = 0;
+            this.columnHeaderName.Text = "Name";
+            this.columnHeaderName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeaderName.Width = 84;
+            // 
+            // columnHeaderCategory
+            // 
+            this.columnHeaderCategory.Text = "Category";
+            this.columnHeaderCategory.Width = 90;
+            // 
             // DataStructureWiki
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 418);
+            this.ClientSize = new System.Drawing.Size(620, 418);
+            this.Controls.Add(this.listViewArray);
             this.Controls.Add(this.buttonInitialise);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.label6);
@@ -310,6 +340,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.Button buttonSort;
         private System.Windows.Forms.Button buttonInitialise;
+        private System.Windows.Forms.ListView listViewArray;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
+        private System.Windows.Forms.ColumnHeader columnHeaderCategory;
     }
 }
 
