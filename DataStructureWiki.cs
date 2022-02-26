@@ -9,6 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListView;
 
 namespace CSharp2Assessment1
 {
@@ -148,28 +149,42 @@ namespace CSharp2Assessment1
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             BubbleSort();
-            //int target = int.Parse(textBoxSearch.Text);
-            //int row1 = 0;
-            //int col1 = colSize - 1;
-            //while ((row1 <= rowSize - 1) && (col1 >= 0))
-            //{
-            //    if (myArray[row1, 0] < target)
-            //    {
-            //        Console.WriteLine("Row " + row1 + " matrix[" + row1 + "," + col1 + "] " + myArray[row1, col1]);
-            //        // listBoxDisplay.Items.Add(^) also possible
-            //        row1++;
-            //    }
-            //    else if (myArray[row1, col1] > target)
-            //    {
-            //        Console.WriteLine("col " + col1 + " matrix[" + row1 + "," + col1 + "] " + myArray[row1, col1]);
-            //        col1--;
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Found");
-            //        return;
-            //    }
-            //}
+            string target = textBoxSearch.Text;
+            int upperBound = rowSize - 1; ;
+            int lowerBound = 0;
+            int mid = 0;
+            bool found = false;
+
+            while (lowerBound <= upperBound)
+            {
+                mid = (upperBound + lowerBound) / 2;
+                if (string.Compare(target, myArray[mid, 0]) > 0)
+                {
+                    upperBound = mid - 1;
+                }
+                else if (string.Compare(target, myArray[mid, 0]) < 0)
+                {
+                    lowerBound = mid + 1;
+                }
+                else if (string.Compare(target, myArray[mid, 0]) == 0)
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (found)
+            {
+                toolStripStatusLabel.Text = "Found";
+                listBoxArray.SelectedIndex = mid;
+                textBoxName.Text = myArray[mid, 0];
+                textBoxCategory.Text = myArray[mid, 1];
+                textBoxStructure.Text = myArray[mid, 2];
+                textBoxDefinition.Text = myArray[mid, 3];
+            }
+            else
+            {
+                toolStripStatusLabel.Text = "Not found";
+            }
         }
 
 
@@ -177,16 +192,16 @@ namespace CSharp2Assessment1
         // in a List box: Name and Category,
         public void DisplayArray()
         {
-            //listBoxArray.Items.Clear();
-            //for (int x = 0; x < rowSize; x++)
-            //{
-            //    string nameCategory = "";
-            //    for (int y = 0; y < 2; y++)
-            //    {
-            //        nameCategory = nameCategory + "   " + myArray[x, y];
-            //    }
-            //    listBoxArray.Items.Add(nameCategory);
-            //}
+            listBoxArray.Items.Clear();
+            for (int x = 0; x < rowSize; x++)
+            {
+                string nameCategory = "";
+                for (int y = 0; y < 2; y++)
+                {
+                    nameCategory = nameCategory + "   " + myArray[x, y];
+                }
+                listBoxArray.Items.Add(nameCategory);
+            }
 
             listViewArray.Items.Clear();
             for (int x = 0; x < rowSize; x++)
@@ -211,11 +226,26 @@ namespace CSharp2Assessment1
 
         private void listViewArray_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //ListViewItem lvi = new ListViewItem(listViewArray.Items);
-            //lvi.SubItems.Add(listViewArray.SelectedItems);
+            //SelectedListViewItemCollection list = listViewArray.SelectedItems;
+            //string name = "";
+            //string category = "";
+            //string structure = "";
+            //string definition = "";
+            //foreach (ListViewItem item in list)
+            //{
+            //    name = item.SubItems[0].Text;
+            //    category = item.SubItems[1].Text;
+            //    //structure = item.SubItems[2].Text;
+            //    //definition = item.SubItems[3].Text;
+            //}
+            //textBoxName.Text = name;
+            //textBoxCategory.Text = category;
+            ////textBoxStructure.Text = structure;
+            ////textBoxDefinition.Text = definition;
 
-            //textBoxName.Text = myArray[listViewArray.SelectedIndices, 0].ToString();
-            //listViewArray.
+            //SelectedIndexCollection s = new SelectedIndexCollection(listViewArray);
+            //Console.WriteLine(s.ToString());
+            ////textBoxName.Text = myArray[s[0], 0].ToString();
         }
 
 
