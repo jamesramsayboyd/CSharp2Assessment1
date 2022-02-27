@@ -13,6 +13,11 @@ using static System.Windows.Forms.ListView;
 
 namespace CSharp2Assessment1
 {
+    /* 
+     * James Boyd 30041547
+     * C Sharp 2 Assignment AT01
+     * Data Structure Wiki
+     */
     public partial class DataStructureWiki : Form
     {
         // Q8.1 Global 2D Array of type String using static variables for dimensions
@@ -25,23 +30,6 @@ namespace CSharp2Assessment1
         public DataStructureWiki()
         {
             InitializeComponent();
-        }
-
-        private void buttonInitialise_Click(object sender, EventArgs e)
-        {
-            InitializeArray();
-        }
-
-        public void InitializeArray()
-        {
-            for (int i = 0; i < rowSize; i++)
-            {
-                for (int j = 0; j < colSize; j++)
-                {
-                    myArray[i, j] = "x";
-                }
-            }
-            DisplayArray();
         }
 
 
@@ -89,13 +77,25 @@ namespace CSharp2Assessment1
         {
             ClearTextBoxes();
         }
-
+        private void textBoxCategory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ClearTextBoxes();
+        }
+        private void textBoxStructure_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ClearTextBoxes();
+        }
+        private void textBoxDefinition_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ClearTextBoxes();
+        }
         private void ClearTextBoxes()
         {
             textBoxName.Clear();
             textBoxCategory.Clear();
             textBoxStructure.Clear();
             textBoxDefinition.Clear();
+            toolStripStatusLabel.Text = "Textboxes cleared";
         }
 
         // A double mouse click in the search text box will clear the search input box
@@ -146,11 +146,12 @@ namespace CSharp2Assessment1
 
         // Q8.5 A Binary Search method for the Name in the 2D array, displaying information
         // in textboxes when found, with appropriate user feedback
+        #region SEARCH
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             BubbleSort();
-            string target = textBoxSearch.Text;
-            int upperBound = rowSize - 1; ;
+            string target = textBoxSearch.Text.ToUpper();
+            int upperBound = nextEmptyRow - 1; ;
             int lowerBound = 0;
             int mid = 0;
             bool found = false;
@@ -158,24 +159,26 @@ namespace CSharp2Assessment1
             while (lowerBound <= upperBound)
             {
                 mid = (upperBound + lowerBound) / 2;
-                if (string.Compare(target, myArray[mid, 0]) > 0)
-                {
-                    upperBound = mid - 1;
-                }
-                else if (string.Compare(target, myArray[mid, 0]) < 0)
-                {
-                    lowerBound = mid + 1;
-                }
-                else if (string.Compare(target, myArray[mid, 0]) == 0)
+                if (string.Compare(target, myArray[mid, 0].ToUpper()) == 0)
                 {
                     found = true;
                     break;
+                }
+                else if (string.Compare(target, myArray[mid, 0].ToUpper()) < 0)
+                {
+                    upperBound = mid - 1;
+                }
+                else if (string.Compare(target, myArray[mid, 0].ToUpper()) > 0)
+                {
+                    lowerBound = mid + 1;
                 }
             }
             if (found)
             {
                 toolStripStatusLabel.Text = "Found";
                 listBoxArray.SelectedIndex = mid;
+                listViewArray.SelectedIndices.Add(mid);
+
                 textBoxName.Text = myArray[mid, 0];
                 textBoxCategory.Text = myArray[mid, 1];
                 textBoxStructure.Text = myArray[mid, 2];
@@ -186,13 +189,15 @@ namespace CSharp2Assessment1
                 toolStripStatusLabel.Text = "Not found";
             }
         }
-
+        #endregion SEARCH
 
         // Q8.6 Create a display method that will show the following information
         // in a List box: Name and Category,
+        #region DISPLAY
         public void DisplayArray()
         {
             listBoxArray.Items.Clear();
+
             for (int x = 0; x < rowSize; x++)
             {
                 string nameCategory = "";
@@ -212,42 +217,33 @@ namespace CSharp2Assessment1
             }
 
         }
-
+        #endregion DISPLAY
 
         // Q8.7	Create a method so the user can select a definition(Name) from the Listbox
         // and all the information is displayed in the appropriate Textboxes,
+        #region SELECT
         private void listBoxArray_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxName.Text = myArray[listBoxArray.SelectedIndex, 0].ToString();
             textBoxCategory.Text = myArray[listBoxArray.SelectedIndex, 1].ToString();
             textBoxStructure.Text = myArray[listBoxArray.SelectedIndex, 2].ToString();
             textBoxDefinition.Text = myArray[listBoxArray.SelectedIndex, 3].ToString();
+            toolStripStatusLabel.Text = "Showing all data for " + myArray[listBoxArray.SelectedIndex, 0].ToString();
         }
 
         private void listViewArray_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //SelectedListViewItemCollection list = listViewArray.SelectedItems;
-            //string name = "";
-            //string category = "";
-            //string structure = "";
-            //string definition = "";
-            //foreach (ListViewItem item in list)
-            //{
-            //    name = item.SubItems[0].Text;
-            //    category = item.SubItems[1].Text;
-            //    //structure = item.SubItems[2].Text;
-            //    //definition = item.SubItems[3].Text;
-            //}
-            //textBoxName.Text = name;
-            //textBoxCategory.Text = category;
-            ////textBoxStructure.Text = structure;
-            ////textBoxDefinition.Text = definition;
-
-            //SelectedIndexCollection s = new SelectedIndexCollection(listViewArray);
-            //Console.WriteLine(s.ToString());
-            ////textBoxName.Text = myArray[s[0], 0].ToString();
+            SelectedIndexCollection indices = new SelectedIndexCollection(listViewArray);
+            foreach (int index in indices)
+            {
+                textBoxName.Text = myArray[index, 0].ToString();
+                textBoxCategory.Text = myArray[index, 1].ToString();
+                textBoxStructure.Text = myArray[index, 2].ToString();
+                textBoxDefinition.Text = myArray[index, 3].ToString();
+                toolStripStatusLabel.Text = "Showing all data for " + myArray[index, 0].ToString();
+            }            
         }
-
+        #endregion SELECT
 
 
         // Q8.8 Create a SAVE button so the information from the 2D array can be written into
@@ -255,6 +251,7 @@ namespace CSharp2Assessment1
         #region SAVE
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            BubbleSort();
             SaveFileDialog saveFileDialogVG = new SaveFileDialog();
             saveFileDialogVG.Filter = "DAT file|*.dat";
             saveFileDialogVG.Title = "Save a DAT File";
@@ -278,26 +275,18 @@ namespace CSharp2Assessment1
                 using (Stream stream = File.Open(saveFileName, FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
-                    for (int y = 0; y < colSize; y++)
+                    for (int x = 0; x < rowSize; x++)
                     {
-                        for (int x = 0; x < rowSize; x++)
+                        for (int y = 0; y < colSize; y++)
                         {
                             bin.Serialize(stream, myArray[x, y]);
                         }
                     }
-                    //BinaryFormatter bin = new BinaryFormatter();
-                    //for (int x = 0; x < rowSize; x++)
-                    //{
-                    //    for (int y = 0; y < colSize; y++)
-                    //    {
-                    //        bin.Serialize(stream, myArray[x, y]);
-                    //    }
-                    //}
                 }
             }
             catch (IOException ex)
             {
-                MessageBox.Show(ex.ToString());
+                toolStripStatusLabel.Text = "Could not save .dat file";
             }
         }
         #endregion SAVE
@@ -307,6 +296,7 @@ namespace CSharp2Assessment1
         #region OPEN
         private void buttonOpen_Click(object sender, EventArgs e)
         {
+            nextEmptyRow = 0;
             OpenFileDialog openFileDialogVG = new OpenFileDialog();
             openFileDialogVG.Filter = "DAT Files|*.dat";
             openFileDialogVG.Title = "Select a DAT File";
@@ -322,23 +312,23 @@ namespace CSharp2Assessment1
                 using (Stream stream = File.Open(openFileName, FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
-                    for (int y = 0; y < colSize; y++)
+                    for (int x = 0; x < rowSize; x++)
                     {
-                        for (int x = 0; x < rowSize; x++)
+                        for (int y = 0; y < colSize; y++)
                         {
                             myArray[x, y] = (string)bin.Deserialize(stream);
                         }
-                        // this is no good. Open function gets axes around the wrong way
-                        nextEmptyRow += 3;
+                        nextEmptyRow++;
                     }
                 }
             }
             catch (IOException ex)
             {
-                MessageBox.Show(ex.ToString());
+                toolStripStatusLabel.Text = "Could not open .dat file";
             }
             DisplayArray();
         }
         #endregion OPEN
+
     }
 }

@@ -49,7 +49,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonSort = new System.Windows.Forms.Button();
-            this.buttonInitialise = new System.Windows.Forms.Button();
             this.listViewArray = new System.Windows.Forms.ListView();
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -128,6 +127,7 @@
             this.textBoxCategory.Name = "textBoxCategory";
             this.textBoxCategory.Size = new System.Drawing.Size(137, 20);
             this.textBoxCategory.TabIndex = 7;
+            this.textBoxCategory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxCategory_MouseDoubleClick);
             // 
             // textBoxStructure
             // 
@@ -135,6 +135,7 @@
             this.textBoxStructure.Name = "textBoxStructure";
             this.textBoxStructure.Size = new System.Drawing.Size(137, 20);
             this.textBoxStructure.TabIndex = 8;
+            this.textBoxStructure.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxStructure_MouseDoubleClick);
             // 
             // textBoxDefinition
             // 
@@ -143,6 +144,7 @@
             this.textBoxDefinition.Name = "textBoxDefinition";
             this.textBoxDefinition.Size = new System.Drawing.Size(137, 127);
             this.textBoxDefinition.TabIndex = 9;
+            this.textBoxDefinition.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxDefinition_MouseDoubleClick);
             // 
             // label1
             // 
@@ -244,25 +246,15 @@
             this.buttonSort.UseVisualStyleBackColor = true;
             this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
-            // buttonInitialise
-            // 
-            this.buttonInitialise.Location = new System.Drawing.Point(284, 327);
-            this.buttonInitialise.Name = "buttonInitialise";
-            this.buttonInitialise.Size = new System.Drawing.Size(75, 23);
-            this.buttonInitialise.TabIndex = 20;
-            this.buttonInitialise.Text = "Initialise";
-            this.buttonInitialise.UseVisualStyleBackColor = true;
-            this.buttonInitialise.Click += new System.EventHandler(this.buttonInitialise_Click);
-            // 
             // listViewArray
             // 
             this.listViewArray.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderName,
             this.columnHeaderCategory});
             this.listViewArray.HideSelection = false;
-            this.listViewArray.Location = new System.Drawing.Point(392, 79);
+            this.listViewArray.Location = new System.Drawing.Point(388, 63);
             this.listViewArray.Name = "listViewArray";
-            this.listViewArray.Size = new System.Drawing.Size(176, 238);
+            this.listViewArray.Size = new System.Drawing.Size(201, 254);
             this.listViewArray.TabIndex = 21;
             this.listViewArray.UseCompatibleStateImageBehavior = false;
             this.listViewArray.View = System.Windows.Forms.View.Details;
@@ -270,10 +262,8 @@
             // 
             // columnHeaderName
             // 
-            this.columnHeaderName.DisplayIndex = 0;
             this.columnHeaderName.Text = "Name";
-            this.columnHeaderName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeaderName.Width = 84;
+            this.columnHeaderName.Width = 118;
             // 
             // columnHeaderCategory
             // 
@@ -286,7 +276,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 418);
             this.Controls.Add(this.listViewArray);
-            this.Controls.Add(this.buttonInitialise);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -339,7 +328,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.Button buttonSort;
-        private System.Windows.Forms.Button buttonInitialise;
         private System.Windows.Forms.ListView listViewArray;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderCategory;
