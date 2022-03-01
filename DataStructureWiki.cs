@@ -37,39 +37,141 @@ namespace CSharp2Assessment1
         // from the four text boxes into the 2D Array, or allow users to change or 
         // delete this information
         #region ADD EDIT DELETE
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            myArray[nextEmptyRow, 0] = textBoxName.Text;
-            myArray[nextEmptyRow, 1] = textBoxCategory.Text;
-            myArray[nextEmptyRow, 2] = textBoxStructure.Text;
-            myArray[nextEmptyRow, 3] = textBoxDefinition.Text;
-            nextEmptyRow++;
-            DisplayArray();
-            toolStripStatusLabel.Text = "Entry added";
+            if (!string.IsNullOrEmpty(textBoxName.Text) && 
+                !string.IsNullOrEmpty(textBoxCategory.Text) &&
+                !string.IsNullOrEmpty(textBoxStructure.Text) && 
+                !string.IsNullOrEmpty(textBoxDefinition.Text))
+            {
+                if (nextEmptyRow < rowSize)
+                {
+                    myArray[nextEmptyRow, 0] = textBoxName.Text;
+                    myArray[nextEmptyRow, 1] = textBoxCategory.Text;
+                    myArray[nextEmptyRow, 2] = textBoxStructure.Text;
+                    myArray[nextEmptyRow, 3] = textBoxDefinition.Text;
+                    nextEmptyRow++;
+                    DisplayArray();
+                    toolStripStatusLabel.Text = "Entry added";
+                }
+                else
+                {
+                    toolStripStatusLabel.Text = "Array is full, cannot add new entry";
+                }
+            }
+            else
+            {
+                toolStripStatusLabel.Text = "Please enter text in all textboxes";
+            }
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            myArray[listBoxArray.SelectedIndex, 0] = textBoxName.Text;
-            myArray[listBoxArray.SelectedIndex, 1] = textBoxCategory.Text;
-            myArray[listBoxArray.SelectedIndex, 2] = textBoxStructure.Text;
-            myArray[listBoxArray.SelectedIndex, 3] = textBoxDefinition.Text;
-            DisplayArray();
-            toolStripStatusLabel.Text = "Entry edited";
+            if (nextEmptyRow > 0)
+            {
+                if (listBoxArray.SelectedIndex != -1)
+                {
+                    DialogResult editButton = MessageBox.Show("Do you wish to edit this entry?",
+                        "Edit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (editButton == DialogResult.Yes)
+                    {
+                        myArray[listBoxArray.SelectedIndex, 0] = textBoxName.Text;
+                        myArray[listBoxArray.SelectedIndex, 1] = textBoxCategory.Text;
+                        myArray[listBoxArray.SelectedIndex, 2] = textBoxStructure.Text;
+                        myArray[listBoxArray.SelectedIndex, 3] = textBoxDefinition.Text;
+                        DisplayArray();
+                        toolStripStatusLabel.Text = "Entry edited";
+                    }
+                    else
+                    {
+                        toolStripStatusLabel.Text = "Entry was not edited";
+                    }
+                }
+                else
+                {
+                    toolStripStatusLabel.Text = "Please select an entry to edit";
+                }
+            }
+            else
+            {
+                toolStripStatusLabel.Text = "Cannot edit, array is empty";
+            }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            for (int j = 0; j < 4; j++)
+            //if (nextEmptyRow > 0)
+            //{
+            //    if (listBoxArray.SelectedIndex != -1)
+            //    {
+            //        DialogResult delName = MessageBox.Show("Do you wish to delete this Name?",
+            //     "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //        if (delName == DialogResult.Yes)
+            //        {
+            //            for (int j = 0; j < 4; j++)
+            //            {
+            //                // TODO: Work on delete function
+            //                myArray[listBoxArray.SelectedIndex, j] = "x";
+            //            }
+            //            nextEmptyRow--;
+            //            DisplayArray();
+            //            toolStripStatusLabel.Text = "Entry deleted";
+            //        }
+            //        else
+            //        {
+            //            toolStripStatusLabel.Text = "Entry was not deleted";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        toolStripStatusLabel.Text = "Please select an entry to delete";
+            //    }
+            //}
+            //else
+            //{
+            //    toolStripStatusLabel.Text = "Cannot delete, array is empty";
+            //}
+
+            if (nextEmptyRow > 0)
             {
-                myArray[listBoxArray.SelectedIndex, j] = "x";
+                if (listViewArray.SelectedItems.Count > 0)
+                {
+                    Console.WriteLine(listViewArray.SelectedItems.Count);
+                    DialogResult delName = MessageBox.Show("Do you wish to delete this Name?",
+                 "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (delName == DialogResult.Yes)
+                    {
+                        for (int j = 0; j < 4; j++)
+                        {
+                            // TODO: Work on delete function
+                            SelectedIndexCollection indices = new SelectedIndexCollection(listViewArray);
+                            Console.WriteLine(indices);
+                            foreach (int index in indices)
+                            {
+                                myArray[index, j] = "";
+                            }
+                        }
+                        nextEmptyRow--;
+                        DisplayArray();
+                        toolStripStatusLabel.Text = "Entry deleted";
+                    }
+                    else
+                    {
+                        toolStripStatusLabel.Text = "Entry was not deleted";
+                    }
+                }
+                else
+                {
+                    toolStripStatusLabel.Text = "Please select an entry to delete";
+                }
             }
-            nextEmptyRow--;
-            DisplayArray();
-            toolStripStatusLabel.Text = "Entry deleted";
+            else
+            {
+                toolStripStatusLabel.Text = "Cannot delete, array is empty";
+            }
         }
         #endregion ADD EDIT DELETE
-
 
         // Q8.3	Create a CLEAR method to clear the four text boxes so a new definition can be added
         #region CLEAR
@@ -104,7 +206,6 @@ namespace CSharp2Assessment1
             textBoxSearch.Clear();
         }
         #endregion CLEAR
-
 
         // Q8.4 A Bubble Sort method to sort the 2D array by Name ascending
         #region SORT
@@ -142,7 +243,6 @@ namespace CSharp2Assessment1
             x[b, k] = temp[0, k];
         }
         #endregion SORT
-
 
         // Q8.5 A Binary Search method for the Name in the 2D array, displaying information
         // in textboxes when found, with appropriate user feedback
@@ -235,11 +335,11 @@ namespace CSharp2Assessment1
         #region SELECT
         private void listBoxArray_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxName.Text = myArray[listBoxArray.SelectedIndex, 0].ToString();
-            textBoxCategory.Text = myArray[listBoxArray.SelectedIndex, 1].ToString();
-            textBoxStructure.Text = myArray[listBoxArray.SelectedIndex, 2].ToString();
-            textBoxDefinition.Text = myArray[listBoxArray.SelectedIndex, 3].ToString();
-            toolStripStatusLabel.Text = "Showing all data for " + myArray[listBoxArray.SelectedIndex, 0].ToString();
+            //textBoxName.Text = myArray[listBoxArray.SelectedIndex, 0].ToString();
+            //textBoxCategory.Text = myArray[listBoxArray.SelectedIndex, 1].ToString();
+            //textBoxStructure.Text = myArray[listBoxArray.SelectedIndex, 2].ToString();
+            //textBoxDefinition.Text = myArray[listBoxArray.SelectedIndex, 3].ToString();
+            //toolStripStatusLabel.Text = "Showing all data for " + myArray[listBoxArray.SelectedIndex, 0].ToString();
         }
 
         private void listViewArray_SelectedIndexChanged(object sender, EventArgs e)
@@ -255,7 +355,6 @@ namespace CSharp2Assessment1
             }            
         }
         #endregion SELECT
-
 
         // Q8.8 Create a SAVE button so the information from the 2D array can be written into
         // a binary file called definitions.dat which is sorted by Name
