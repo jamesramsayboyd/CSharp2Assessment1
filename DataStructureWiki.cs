@@ -198,15 +198,26 @@ namespace CSharp2Assessment1
         {
             listBoxArray.Items.Clear();
 
-            for (int x = 0; x < rowSize; x++)
+            //for (int x = 0; x < rowSize; x++)
+            //{
+            //    string nameCategory = "";
+            //    for (int y = 0; y < 2; y++)
+            //    {
+            //        nameCategory = nameCategory + "   " + myArray[x, y];
+            //    }
+            //    listBoxArray.Items.Add(nameCategory);
+            //}
+
+            for (int i = 0; i < nextEmptyRow; i++)
             {
-                string nameCategory = "";
-                for (int y = 0; y < 2; y++)
-                {
-                    nameCategory = nameCategory + "   " + myArray[x, y];
-                }
-                listBoxArray.Items.Add(nameCategory);
+                string name = myArray[i, 0].ToString();
+                string category = myArray[i, 1].ToString();
+                int x = 28 - name.Length - category.Length;
+                string space = new string(' ', x);
+                string display = name + space + category;
+                listBoxArray.Items.Add(display);
             }
+
 
             listViewArray.Items.Clear();
             for (int x = 0; x < rowSize; x++)

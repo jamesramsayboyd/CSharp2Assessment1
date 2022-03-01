@@ -105,10 +105,12 @@
             // 
             // listBoxArray
             // 
+            this.listBoxArray.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxArray.FormattingEnabled = true;
+            this.listBoxArray.ItemHeight = 14;
             this.listBoxArray.Location = new System.Drawing.Point(178, 79);
             this.listBoxArray.Name = "listBoxArray";
-            this.listBoxArray.Size = new System.Drawing.Size(181, 238);
+            this.listBoxArray.Size = new System.Drawing.Size(206, 228);
             this.listBoxArray.TabIndex = 5;
             this.listBoxArray.SelectedIndexChanged += new System.EventHandler(this.listBoxArray_SelectedIndexChanged);
             // 
@@ -181,7 +183,7 @@
             this.toolStripStatusLabel});
             this.stripStatus.Location = new System.Drawing.Point(0, 396);
             this.stripStatus.Name = "stripStatus";
-            this.stripStatus.Size = new System.Drawing.Size(620, 22);
+            this.stripStatus.Size = new System.Drawing.Size(645, 22);
             this.stripStatus.TabIndex = 13;
             this.stripStatus.Text = "-";
             // 
@@ -194,7 +196,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(190, 63);
+            this.label2.Location = new System.Drawing.Point(204, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(155, 13);
             this.label2.TabIndex = 14;
@@ -252,7 +254,7 @@
             this.columnHeaderName,
             this.columnHeaderCategory});
             this.listViewArray.HideSelection = false;
-            this.listViewArray.Location = new System.Drawing.Point(388, 63);
+            this.listViewArray.Location = new System.Drawing.Point(420, 63);
             this.listViewArray.Name = "listViewArray";
             this.listViewArray.Size = new System.Drawing.Size(201, 254);
             this.listViewArray.TabIndex = 21;
@@ -274,7 +276,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 418);
+            this.ClientSize = new System.Drawing.Size(645, 418);
             this.Controls.Add(this.listViewArray);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.label6);
