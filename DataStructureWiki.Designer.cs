@@ -33,7 +33,6 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
-            this.listBoxArray = new System.Windows.Forms.ListBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxCategory = new System.Windows.Forms.TextBox();
             this.textBoxStructure = new System.Windows.Forms.TextBox();
@@ -43,7 +42,6 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.stripStatus = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -102,17 +100,6 @@
             this.buttonDelete.Text = "DELETE";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            // 
-            // listBoxArray
-            // 
-            this.listBoxArray.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxArray.FormattingEnabled = true;
-            this.listBoxArray.ItemHeight = 14;
-            this.listBoxArray.Location = new System.Drawing.Point(178, 79);
-            this.listBoxArray.Name = "listBoxArray";
-            this.listBoxArray.Size = new System.Drawing.Size(206, 228);
-            this.listBoxArray.TabIndex = 5;
-            this.listBoxArray.SelectedIndexChanged += new System.EventHandler(this.listBoxArray_SelectedIndexChanged);
             // 
             // textBoxName
             // 
@@ -183,7 +170,7 @@
             this.toolStripStatusLabel});
             this.stripStatus.Location = new System.Drawing.Point(0, 396);
             this.stripStatus.Name = "stripStatus";
-            this.stripStatus.Size = new System.Drawing.Size(645, 22);
+            this.stripStatus.Size = new System.Drawing.Size(411, 22);
             this.stripStatus.TabIndex = 13;
             this.stripStatus.Text = "-";
             // 
@@ -192,15 +179,6 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(12, 17);
             this.toolStripStatusLabel.Text = "-";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(204, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Name                          Category";
             // 
             // label3
             // 
@@ -254,9 +232,9 @@
             this.columnHeaderName,
             this.columnHeaderCategory});
             this.listViewArray.HideSelection = false;
-            this.listViewArray.Location = new System.Drawing.Point(420, 63);
+            this.listViewArray.Location = new System.Drawing.Point(178, 50);
             this.listViewArray.Name = "listViewArray";
-            this.listViewArray.Size = new System.Drawing.Size(201, 254);
+            this.listViewArray.Size = new System.Drawing.Size(205, 254);
             this.listViewArray.TabIndex = 21;
             this.listViewArray.UseCompatibleStateImageBehavior = false;
             this.listViewArray.View = System.Windows.Forms.View.Details;
@@ -276,14 +254,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 418);
+            this.ClientSize = new System.Drawing.Size(411, 418);
             this.Controls.Add(this.listViewArray);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.stripStatus);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonOpen);
@@ -292,7 +269,6 @@
             this.Controls.Add(this.textBoxStructure);
             this.Controls.Add(this.textBoxCategory);
             this.Controls.Add(this.textBoxName);
-            this.Controls.Add(this.listBoxArray);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
@@ -314,7 +290,6 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.ListBox listBoxArray;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxCategory;
         private System.Windows.Forms.TextBox textBoxStructure;
@@ -323,7 +298,6 @@
         private System.Windows.Forms.Button buttonOpen;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.StatusStrip stripStatus;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

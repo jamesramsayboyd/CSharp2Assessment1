@@ -32,7 +32,6 @@ namespace CSharp2Assessment1
             InitializeComponent();
         }
 
-
         // Q8.2 Create ADD, EDIT and DELETE buttons that will store the information
         // from the four text boxes into the 2D Array, or allow users to change or 
         // delete this information
@@ -70,16 +69,22 @@ namespace CSharp2Assessment1
         {
             if (nextEmptyRow > 0)
             {
-                if (listBoxArray.SelectedIndex != -1)
+                if (listViewArray.SelectedItems.Count > 0)
                 {
-                    DialogResult editButton = MessageBox.Show("Do you wish to edit this entry?",
+                    DialogResult editChoice = MessageBox.Show("Do you wish to edit this entry?",
                         "Edit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (editButton == DialogResult.Yes)
+                    if (editChoice == DialogResult.Yes)
                     {
-                        myArray[listBoxArray.SelectedIndex, 0] = textBoxName.Text;
-                        myArray[listBoxArray.SelectedIndex, 1] = textBoxCategory.Text;
-                        myArray[listBoxArray.SelectedIndex, 2] = textBoxStructure.Text;
-                        myArray[listBoxArray.SelectedIndex, 3] = textBoxDefinition.Text;
+                        SelectedIndexCollection indices = new SelectedIndexCollection(listViewArray);
+                        foreach (int index in indices)
+                        {
+                            myArray[index, 0] = textBoxName.Text;
+                            myArray[index, 1] = textBoxCategory.Text;
+                            myArray[index, 2] = textBoxStructure.Text;
+                            myArray[index, 3] = textBoxDefinition.Text;
+                            toolStripStatusLabel.Text = "Showing all data for " + myArray[index, 0].ToString();
+                        }
+
                         DisplayArray();
                         toolStripStatusLabel.Text = "Entry edited";
                     }
@@ -101,59 +106,28 @@ namespace CSharp2Assessment1
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            //if (nextEmptyRow > 0)
-            //{
-            //    if (listBoxArray.SelectedIndex != -1)
-            //    {
-            //        DialogResult delName = MessageBox.Show("Do you wish to delete this Name?",
-            //     "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //        if (delName == DialogResult.Yes)
-            //        {
-            //            for (int j = 0; j < 4; j++)
-            //            {
-            //                // TODO: Work on delete function
-            //                myArray[listBoxArray.SelectedIndex, j] = "x";
-            //            }
-            //            nextEmptyRow--;
-            //            DisplayArray();
-            //            toolStripStatusLabel.Text = "Entry deleted";
-            //        }
-            //        else
-            //        {
-            //            toolStripStatusLabel.Text = "Entry was not deleted";
-            //        }
-            //    }
-            //    else
-            //    {
-            //        toolStripStatusLabel.Text = "Please select an entry to delete";
-            //    }
-            //}
-            //else
-            //{
-            //    toolStripStatusLabel.Text = "Cannot delete, array is empty";
-            //}
-
             if (nextEmptyRow > 0)
             {
                 if (listViewArray.SelectedItems.Count > 0)
                 {
-                    Console.WriteLine(listViewArray.SelectedItems.Count);
-                    DialogResult delName = MessageBox.Show("Do you wish to delete this Name?",
+                    DialogResult delChoice = MessageBox.Show("Do you wish to delete this Name?",
                  "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (delName == DialogResult.Yes)
+                    if (delChoice == DialogResult.Yes)
                     {
-                        for (int j = 0; j < 4; j++)
+                        for (int x = 0; x < colSize; x++)
                         {
-                            // TODO: Work on delete function
                             SelectedIndexCollection indices = new SelectedIndexCollection(listViewArray);
                             Console.WriteLine(indices);
                             foreach (int index in indices)
                             {
-                                myArray[index, j] = "";
+                                // Using swap method to move deleted item to the end of the array
+                                // then redisplay array minus that last element
+                                Swap(myArray, index, nextEmptyRow - 1, x);
                             }
                         }
                         nextEmptyRow--;
                         DisplayArray();
+                        ClearTextBoxes();
                         toolStripStatusLabel.Text = "Entry deleted";
                     }
                     else
@@ -276,7 +250,6 @@ namespace CSharp2Assessment1
             if (found)
             {
                 toolStripStatusLabel.Text = "Found";
-                listBoxArray.SelectedIndex = mid;
                 listViewArray.SelectedIndices.Add(mid);
 
                 textBoxName.Text = myArray[mid, 0];
@@ -296,52 +269,19 @@ namespace CSharp2Assessment1
         #region DISPLAY
         public void DisplayArray()
         {
-            listBoxArray.Items.Clear();
-
-            //for (int x = 0; x < rowSize; x++)
-            //{
-            //    string nameCategory = "";
-            //    for (int y = 0; y < 2; y++)
-            //    {
-            //        nameCategory = nameCategory + "   " + myArray[x, y];
-            //    }
-            //    listBoxArray.Items.Add(nameCategory);
-            //}
-
-            for (int i = 0; i < nextEmptyRow; i++)
-            {
-                string name = myArray[i, 0].ToString();
-                string category = myArray[i, 1].ToString();
-                int x = 28 - name.Length - category.Length;
-                string space = new string(' ', x);
-                string display = name + space + category;
-                listBoxArray.Items.Add(display);
-            }
-
-
             listViewArray.Items.Clear();
-            for (int x = 0; x < rowSize; x++)
+            for (int x = 0; x < nextEmptyRow; x++)
             {
                 ListViewItem lvi = new ListViewItem(myArray[x, 0]);
                 lvi.SubItems.Add(myArray[x, 1]);
                 listViewArray.Items.Add(lvi);
             }
-
         }
         #endregion DISPLAY
 
         // Q8.7	Create a method so the user can select a definition(Name) from the Listbox
         // and all the information is displayed in the appropriate Textboxes,
         #region SELECT
-        private void listBoxArray_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //textBoxName.Text = myArray[listBoxArray.SelectedIndex, 0].ToString();
-            //textBoxCategory.Text = myArray[listBoxArray.SelectedIndex, 1].ToString();
-            //textBoxStructure.Text = myArray[listBoxArray.SelectedIndex, 2].ToString();
-            //textBoxDefinition.Text = myArray[listBoxArray.SelectedIndex, 3].ToString();
-            //toolStripStatusLabel.Text = "Showing all data for " + myArray[listBoxArray.SelectedIndex, 0].ToString();
-        }
-
         private void listViewArray_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedIndexCollection indices = new SelectedIndexCollection(listViewArray);
