@@ -24,7 +24,7 @@ namespace CSharp2Assessment1
         static int rowSize = 12;
         static int colSize = 4;
         static string[,] myArray = new string[rowSize, colSize];
-        string defaultFileName = "definitions.dat";
+        string defaultFileName = "definitions";
         int nextEmptyRow = 0;
 
         public DataStructureWiki()
@@ -36,7 +36,6 @@ namespace CSharp2Assessment1
         // from the four text boxes into the 2D Array, or allow users to change or 
         // delete this information
         #region ADD EDIT DELETE
-
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textBoxName.Text) && 
@@ -55,14 +54,10 @@ namespace CSharp2Assessment1
                     toolStripStatusLabel.Text = "Entry added";
                 }
                 else
-                {
                     toolStripStatusLabel.Text = "Array is full, cannot add new entry";
-                }
             }
             else
-            {
                 toolStripStatusLabel.Text = "Please enter text in all textboxes";
-            }
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -75,33 +70,23 @@ namespace CSharp2Assessment1
                         "Edit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (editChoice == DialogResult.Yes)
                     {
-                        SelectedIndexCollection indices = new SelectedIndexCollection(listViewArray);
-                        foreach (int index in indices)
-                        {
-                            myArray[index, 0] = textBoxName.Text;
-                            myArray[index, 1] = textBoxCategory.Text;
-                            myArray[index, 2] = textBoxStructure.Text;
-                            myArray[index, 3] = textBoxDefinition.Text;
-                            toolStripStatusLabel.Text = "Showing all data for " + myArray[index, 0].ToString();
-                        }
-
+                        int index = listViewArray.FocusedItem.Index;
+                        myArray[index, 0] = textBoxName.Text;
+                        myArray[index, 1] = textBoxCategory.Text;
+                        myArray[index, 2] = textBoxStructure.Text;
+                        myArray[index, 3] = textBoxDefinition.Text;
+                        toolStripStatusLabel.Text = "Showing all data for " + myArray[index, 0].ToString();
                         DisplayArray();
                         toolStripStatusLabel.Text = "Entry edited";
                     }
                     else
-                    {
                         toolStripStatusLabel.Text = "Entry was not edited";
-                    }
                 }
                 else
-                {
                     toolStripStatusLabel.Text = "Please select an entry to edit";
-                }
             }
             else
-            {
                 toolStripStatusLabel.Text = "Cannot edit, array is empty";
-            }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -114,16 +99,16 @@ namespace CSharp2Assessment1
                  "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (delChoice == DialogResult.Yes)
                     {
-                        for (int x = 0; x < colSize; x++)
+                        int index = listViewArray.FocusedItem.Index;
+                        while (index < nextEmptyRow - 1)
                         {
-                            SelectedIndexCollection indices = new SelectedIndexCollection(listViewArray);
-                            Console.WriteLine(indices);
-                            foreach (int index in indices)
+                            for (int k = 0; k < colSize; k++)
                             {
-                                // Using swap method to move deleted item to the end of the array
-                                // then redisplay array minus that last element
-                                Swap(myArray, index, nextEmptyRow - 1, x);
+                                // Using swap function to move selected item to end of array then
+                                // decrementing nextEmptyRow and redisplaying list to 'delete' element
+                                Swap(myArray, index + 1, index, k);
                             }
+                            index++;
                         }
                         nextEmptyRow--;
                         DisplayArray();
@@ -131,19 +116,13 @@ namespace CSharp2Assessment1
                         toolStripStatusLabel.Text = "Entry deleted";
                     }
                     else
-                    {
                         toolStripStatusLabel.Text = "Entry was not deleted";
-                    }
                 }
                 else
-                {
                     toolStripStatusLabel.Text = "Please select an entry to delete";
-                }
             }
             else
-            {
                 toolStripStatusLabel.Text = "Cannot delete, array is empty";
-            }
         }
         #endregion ADD EDIT DELETE
 
@@ -185,7 +164,10 @@ namespace CSharp2Assessment1
         #region SORT
         private void buttonSort_Click(object sender, EventArgs e)
         {
-            BubbleSort();
+            if (nextEmptyRow > 0)
+                BubbleSort();
+            else
+                toolStripStatusLabel.Text = "Cannot sort, array is empty";
         }
 
         public void BubbleSort()
@@ -223,44 +205,53 @@ namespace CSharp2Assessment1
         #region SEARCH
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            BubbleSort();
-            string target = textBoxSearch.Text.ToUpper();
-            int upperBound = nextEmptyRow - 1; ;
-            int lowerBound = 0;
-            int mid = 0;
-            bool found = false;
-
-            while (lowerBound <= upperBound)
+            if (nextEmptyRow > 0)
             {
-                mid = (upperBound + lowerBound) / 2;
-                if (string.Compare(target, myArray[mid, 0].ToUpper()) == 0)
+                if (!string.IsNullOrEmpty(textBoxSearch.Text))
                 {
-                    found = true;
-                    break;
-                }
-                else if (string.Compare(target, myArray[mid, 0].ToUpper()) < 0)
-                {
-                    upperBound = mid - 1;
-                }
-                else if (string.Compare(target, myArray[mid, 0].ToUpper()) > 0)
-                {
-                    lowerBound = mid + 1;
-                }
-            }
-            if (found)
-            {
-                toolStripStatusLabel.Text = "Found";
-                listViewArray.SelectedIndices.Add(mid);
+                    BubbleSort();
+                    string target = textBoxSearch.Text.ToUpper();
+                    int upperBound = nextEmptyRow - 1; ;
+                    int lowerBound = 0;
+                    int mid = 0;
+                    bool found = false;
 
-                textBoxName.Text = myArray[mid, 0];
-                textBoxCategory.Text = myArray[mid, 1];
-                textBoxStructure.Text = myArray[mid, 2];
-                textBoxDefinition.Text = myArray[mid, 3];
+                    while (lowerBound <= upperBound)
+                    {
+                        mid = (upperBound + lowerBound) / 2;
+                        if (string.Compare(target, myArray[mid, 0].ToUpper()) == 0)
+                        {
+                            found = true;
+                            break;
+                        }
+                        else if (string.Compare(target, myArray[mid, 0].ToUpper()) < 0)
+                        {
+                            upperBound = mid - 1;
+                        }
+                        else if (string.Compare(target, myArray[mid, 0].ToUpper()) > 0)
+                        {
+                            lowerBound = mid + 1;
+                        }
+                    }
+                    if (found)
+                    {
+                        toolStripStatusLabel.Text = "Search target " + target + " was found";
+                        listViewArray.SelectedIndices.Add(mid);
+
+                        textBoxName.Text = myArray[mid, 0];
+                        textBoxCategory.Text = myArray[mid, 1];
+                        textBoxStructure.Text = myArray[mid, 2];
+                        textBoxDefinition.Text = myArray[mid, 3];
+                    }
+                    else
+                        toolStripStatusLabel.Text = "Search target " + target + " was not found";
+                }
+                else
+                    toolStripStatusLabel.Text = "Please enter a search query";
             }
             else
-            {
-                toolStripStatusLabel.Text = "Not found";
-            }
+                toolStripStatusLabel.Text = "Cannot search, array is empty";
+            
         }
         #endregion SEARCH
 
@@ -284,15 +275,12 @@ namespace CSharp2Assessment1
         #region SELECT
         private void listViewArray_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedIndexCollection indices = new SelectedIndexCollection(listViewArray);
-            foreach (int index in indices)
-            {
-                textBoxName.Text = myArray[index, 0].ToString();
-                textBoxCategory.Text = myArray[index, 1].ToString();
-                textBoxStructure.Text = myArray[index, 2].ToString();
-                textBoxDefinition.Text = myArray[index, 3].ToString();
-                toolStripStatusLabel.Text = "Showing all data for " + myArray[index, 0].ToString();
-            }            
+            int index = listViewArray.FocusedItem.Index;
+            textBoxName.Text = myArray[index, 0].ToString();
+            textBoxCategory.Text = myArray[index, 1].ToString();
+            textBoxStructure.Text = myArray[index, 2].ToString();
+            textBoxDefinition.Text = myArray[index, 3].ToString();
+            toolStripStatusLabel.Text = "Showing all data for " + myArray[index, 0].ToString();
         }
         #endregion SELECT
 
@@ -303,10 +291,11 @@ namespace CSharp2Assessment1
         {
             BubbleSort();
             SaveFileDialog saveFileDialogVG = new SaveFileDialog();
+            saveFileDialogVG.InitialDirectory = Application.StartupPath;
             saveFileDialogVG.Filter = "DAT file|*.dat";
             saveFileDialogVG.Title = "Save a DAT File";
+            saveFileDialogVG.FileName = defaultFileName;
             saveFileDialogVG.DefaultExt = ".dat";
-            //saveFileDialogVG.InitialDirectory = ToString();
             saveFileDialogVG.ShowDialog();
             string fileName = saveFileDialogVG.FileName;
             if (saveFileDialogVG.FileName != "")
@@ -317,6 +306,7 @@ namespace CSharp2Assessment1
             {
                 saveRecord(defaultFileName);
             }
+            //toolStripStatusLabel.Text = "Saved data to file " + (saveFileDialogVG.FileName).Remove(0, (Application.StartupPath.Length + 1));
         }
         private void saveRecord(string saveFileName)
         {
@@ -348,12 +338,18 @@ namespace CSharp2Assessment1
         {
             nextEmptyRow = 0;
             OpenFileDialog openFileDialogVG = new OpenFileDialog();
+            openFileDialogVG.InitialDirectory = Application.StartupPath;
             openFileDialogVG.Filter = "DAT Files|*.dat";
             openFileDialogVG.Title = "Select a DAT File";
             if (openFileDialogVG.ShowDialog() == DialogResult.OK)
             {
                 openRecord(openFileDialogVG.FileName);
             }
+
+            string path = Application.StartupPath;
+            string fullName = openFileDialogVG.FileName;
+            string name = fullName.Remove(0, path.Length + 1);
+            toolStripStatusLabel.Text = "Opened file " + name;
         }
         private void openRecord(string openFileName)
         {
@@ -379,6 +375,5 @@ namespace CSharp2Assessment1
             DisplayArray();
         }
         #endregion OPEN
-
     }
 }
