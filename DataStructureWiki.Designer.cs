@@ -77,7 +77,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(22, 317);
+            this.buttonAdd.Location = new System.Drawing.Point(22, 303);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(112, 23);
             this.buttonAdd.TabIndex = 2;
@@ -88,7 +88,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(153, 317);
+            this.buttonEdit.Location = new System.Drawing.Point(153, 303);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(102, 23);
             this.buttonEdit.TabIndex = 3;
@@ -99,7 +99,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(273, 317);
+            this.buttonDelete.Location = new System.Drawing.Point(273, 303);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(110, 23);
             this.buttonDelete.TabIndex = 4;
@@ -141,7 +141,8 @@
             this.textBoxDefinition.Location = new System.Drawing.Point(22, 164);
             this.textBoxDefinition.Multiline = true;
             this.textBoxDefinition.Name = "textBoxDefinition";
-            this.textBoxDefinition.Size = new System.Drawing.Size(137, 140);
+            this.textBoxDefinition.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxDefinition.Size = new System.Drawing.Size(137, 124);
             this.textBoxDefinition.TabIndex = 9;
             this.toolTip1.SetToolTip(this.textBoxDefinition, "Double-click to clear");
             this.textBoxDefinition.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxDefinition_MouseDoubleClick);
@@ -157,7 +158,7 @@
             // 
             // buttonOpen
             // 
-            this.buttonOpen.Location = new System.Drawing.Point(153, 346);
+            this.buttonOpen.Location = new System.Drawing.Point(153, 332);
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.Size = new System.Drawing.Size(102, 23);
             this.buttonOpen.TabIndex = 11;
@@ -168,7 +169,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(273, 346);
+            this.buttonSave.Location = new System.Drawing.Point(273, 332);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(110, 23);
             this.buttonSave.TabIndex = 12;
@@ -181,7 +182,7 @@
             // 
             this.stripStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.stripStatus.Location = new System.Drawing.Point(0, 386);
+            this.stripStatus.Location = new System.Drawing.Point(0, 367);
             this.stripStatus.Name = "stripStatus";
             this.stripStatus.Size = new System.Drawing.Size(404, 22);
             this.stripStatus.TabIndex = 13;
@@ -235,7 +236,7 @@
             // 
             // buttonSort
             // 
-            this.buttonSort.Location = new System.Drawing.Point(22, 346);
+            this.buttonSort.Location = new System.Drawing.Point(22, 332);
             this.buttonSort.Name = "buttonSort";
             this.buttonSort.Size = new System.Drawing.Size(112, 23);
             this.buttonSort.TabIndex = 19;
@@ -252,7 +253,7 @@
             this.listViewArray.HideSelection = false;
             this.listViewArray.Location = new System.Drawing.Point(178, 50);
             this.listViewArray.Name = "listViewArray";
-            this.listViewArray.Size = new System.Drawing.Size(205, 254);
+            this.listViewArray.Size = new System.Drawing.Size(205, 238);
             this.listViewArray.TabIndex = 21;
             this.listViewArray.UseCompatibleStateImageBehavior = false;
             this.listViewArray.View = System.Windows.Forms.View.Details;
@@ -261,18 +262,18 @@
             // columnHeaderName
             // 
             this.columnHeaderName.Text = "Name";
-            this.columnHeaderName.Width = 118;
+            this.columnHeaderName.Width = 120;
             // 
             // columnHeaderCategory
             // 
             this.columnHeaderCategory.Text = "Category";
-            this.columnHeaderCategory.Width = 90;
+            this.columnHeaderCategory.Width = 80;
             // 
             // DataStructureWiki
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 408);
+            this.ClientSize = new System.Drawing.Size(404, 389);
             this.Controls.Add(this.listViewArray);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.label6);
