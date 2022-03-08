@@ -22,10 +22,10 @@ namespace CSharp2Assessment1
     {
         // Q8.1 Global 2D Array of type String using static variables for dimensions
         static int rowSize = 12;
-        static int colSize = 4;
+        static int colSize = 4; // Name, Category, Structure, Definition
         static string[,] myArray = new string[rowSize, colSize];
-        string defaultFileName = "definitions";
-        int nextEmptyRow = 0;
+        string defaultFileName = "definitions.dat";
+        int nextEmptyRow = 0; // Pointer used to keep track of filled array elements
 
         public DataStructureWiki()
         {
@@ -70,7 +70,7 @@ namespace CSharp2Assessment1
                         "Edit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (editChoice == DialogResult.Yes)
                     {
-                        int index = listViewArray.FocusedItem.Index;
+                        int index = listViewArray.SelectedIndices[0];
                         myArray[index, 0] = textBoxName.Text;
                         myArray[index, 1] = textBoxCategory.Text;
                         myArray[index, 2] = textBoxStructure.Text;
@@ -99,7 +99,7 @@ namespace CSharp2Assessment1
                  "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (delChoice == DialogResult.Yes)
                     {
-                        int index = listViewArray.FocusedItem.Index;
+                        int index = listViewArray.SelectedIndices[0];
                         while (index < nextEmptyRow - 1)
                         {
                             for (int k = 0; k < colSize; k++)
@@ -210,7 +210,7 @@ namespace CSharp2Assessment1
                 if (!string.IsNullOrEmpty(textBoxSearch.Text))
                 {
                     BubbleSort();
-                    string target = textBoxSearch.Text.ToUpper();
+                    string target = textBoxSearch.Text;
                     int upperBound = nextEmptyRow - 1; ;
                     int lowerBound = 0;
                     int mid = 0;
@@ -219,23 +219,23 @@ namespace CSharp2Assessment1
                     while (lowerBound <= upperBound)
                     {
                         mid = (upperBound + lowerBound) / 2;
-                        if (string.Compare(target, myArray[mid, 0].ToUpper()) == 0)
+                        if (string.Compare(target, myArray[mid, 0], ignoreCase: true) == 0)
                         {
                             found = true;
                             break;
                         }
-                        else if (string.Compare(target, myArray[mid, 0].ToUpper()) < 0)
+                        else if (string.Compare(target, myArray[mid, 0], ignoreCase: true) < 0)
                         {
                             upperBound = mid - 1;
                         }
-                        else if (string.Compare(target, myArray[mid, 0].ToUpper()) > 0)
+                        else if (string.Compare(target, myArray[mid, 0], ignoreCase: true) > 0)
                         {
                             lowerBound = mid + 1;
                         }
                     }
                     if (found)
                     {
-                        toolStripStatusLabel.Text = "Search target " + target + " was found";
+                        toolStripStatusLabel.Text = "Search target \"" + target + "\" was found";
                         listViewArray.SelectedIndices.Add(mid);
 
                         textBoxName.Text = myArray[mid, 0];
@@ -244,7 +244,7 @@ namespace CSharp2Assessment1
                         textBoxDefinition.Text = myArray[mid, 3];
                     }
                     else
-                        toolStripStatusLabel.Text = "Search target " + target + " was not found";
+                        toolStripStatusLabel.Text = "Search target \"" + target + "\" was not found";
                 }
                 else
                     toolStripStatusLabel.Text = "Please enter a search query";
@@ -273,9 +273,9 @@ namespace CSharp2Assessment1
         // Q8.7	Create a method so the user can select a definition(Name) from the Listbox
         // and all the information is displayed in the appropriate Textboxes,
         #region SELECT
-        private void listViewArray_SelectedIndexChanged(object sender, EventArgs e)
+        private void listViewArray_Click(object sender, EventArgs e)
         {
-            int index = listViewArray.FocusedItem.Index;
+            int index = listViewArray.SelectedIndices[0];
             textBoxName.Text = myArray[index, 0].ToString();
             textBoxCategory.Text = myArray[index, 1].ToString();
             textBoxStructure.Text = myArray[index, 2].ToString();
@@ -289,13 +289,13 @@ namespace CSharp2Assessment1
         #region SAVE
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            BubbleSort();
+            BubbleSort(); // File must be sorted by Name when saving
             SaveFileDialog saveFileDialogVG = new SaveFileDialog();
             saveFileDialogVG.InitialDirectory = Application.StartupPath;
             saveFileDialogVG.Filter = "DAT file|*.dat";
             saveFileDialogVG.Title = "Save a DAT File";
             saveFileDialogVG.FileName = defaultFileName;
-            saveFileDialogVG.DefaultExt = ".dat";
+            saveFileDialogVG.DefaultExt = "dat";
             saveFileDialogVG.ShowDialog();
             string fileName = saveFileDialogVG.FileName;
             if (saveFileDialogVG.FileName != "")
@@ -306,7 +306,7 @@ namespace CSharp2Assessment1
             {
                 saveRecord(defaultFileName);
             }
-            //toolStripStatusLabel.Text = "Saved data to file " + (saveFileDialogVG.FileName).Remove(0, (Application.StartupPath.Length + 1));
+            toolStripStatusLabel.Text = "Saved data to .dat file";
         }
         private void saveRecord(string saveFileName)
         {
@@ -334,6 +334,34 @@ namespace CSharp2Assessment1
         // Q8.9 Create an OPEN button that will read the information from a binary file called
         // definitions.dat into the 2D array
         #region OPEN
+
+        // User is prompted to open a .dat file on loading the form. If they choose not to, 
+        // the array is initialised with empty string values
+        private void DataStructureWiki_Load(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialogVG = new OpenFileDialog();
+            openFileDialogVG.InitialDirectory = Application.StartupPath;
+            openFileDialogVG.Filter = "DAT Files|*.dat";
+            openFileDialogVG.Title = "Select a DAT File";
+            if (openFileDialogVG.ShowDialog() == DialogResult.OK)
+            {
+                openRecord(openFileDialogVG.FileName);
+                toolStripStatusLabel.Text = "Opened .dat file";
+            }
+            else
+            {
+                for (int x = 0; x < rowSize; x++)
+                {
+                    for (int y = 0; y < colSize; y++)
+                    {
+                        myArray[x, y] = "";
+                    }
+                }
+            }
+            DisplayArray();
+        }
+
+        // If the user manually loads a .dat file, the nextEmptyRow pointer is reset to 0
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             nextEmptyRow = 0;
@@ -345,11 +373,7 @@ namespace CSharp2Assessment1
             {
                 openRecord(openFileDialogVG.FileName);
             }
-
-            string path = Application.StartupPath;
-            string fullName = openFileDialogVG.FileName;
-            string name = fullName.Remove(0, path.Length + 1);
-            toolStripStatusLabel.Text = "Opened file " + name;
+            toolStripStatusLabel.Text = "Opened .dat file";
         }
         private void openRecord(string openFileName)
         {

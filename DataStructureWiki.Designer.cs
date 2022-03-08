@@ -57,16 +57,16 @@
             // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(178, 23);
+            this.textBoxSearch.Location = new System.Drawing.Point(178, 21);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSearch.Size = new System.Drawing.Size(111, 20);
             this.textBoxSearch.TabIndex = 0;
             this.toolTip1.SetToolTip(this.textBoxSearch, "Double-click to clear");
             this.textBoxSearch.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSearch_MouseDoubleClick);
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(284, 21);
+            this.buttonSearch.Location = new System.Drawing.Point(308, 19);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(75, 23);
             this.buttonSearch.TabIndex = 1;
@@ -77,9 +77,9 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(22, 297);
+            this.buttonAdd.Location = new System.Drawing.Point(22, 317);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(137, 23);
+            this.buttonAdd.Size = new System.Drawing.Size(112, 23);
             this.buttonAdd.TabIndex = 2;
             this.buttonAdd.Text = "ADD";
             this.toolTip1.SetToolTip(this.buttonAdd, "Add data in all four textboxes to add it to the array");
@@ -88,9 +88,9 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(22, 327);
+            this.buttonEdit.Location = new System.Drawing.Point(153, 317);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(137, 23);
+            this.buttonEdit.Size = new System.Drawing.Size(102, 23);
             this.buttonEdit.TabIndex = 3;
             this.buttonEdit.Text = "EDIT";
             this.toolTip1.SetToolTip(this.buttonEdit, "Select an item from the array to edit its data");
@@ -99,9 +99,9 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(22, 357);
+            this.buttonDelete.Location = new System.Drawing.Point(273, 317);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(137, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(110, 23);
             this.buttonDelete.TabIndex = 4;
             this.buttonDelete.Text = "DELETE";
             this.toolTip1.SetToolTip(this.buttonDelete, "Select an item from the array to delete it");
@@ -141,7 +141,7 @@
             this.textBoxDefinition.Location = new System.Drawing.Point(22, 164);
             this.textBoxDefinition.Multiline = true;
             this.textBoxDefinition.Name = "textBoxDefinition";
-            this.textBoxDefinition.Size = new System.Drawing.Size(137, 127);
+            this.textBoxDefinition.Size = new System.Drawing.Size(137, 140);
             this.textBoxDefinition.TabIndex = 9;
             this.toolTip1.SetToolTip(this.textBoxDefinition, "Double-click to clear");
             this.textBoxDefinition.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxDefinition_MouseDoubleClick);
@@ -157,9 +157,9 @@
             // 
             // buttonOpen
             // 
-            this.buttonOpen.Location = new System.Drawing.Point(178, 357);
+            this.buttonOpen.Location = new System.Drawing.Point(153, 346);
             this.buttonOpen.Name = "buttonOpen";
-            this.buttonOpen.Size = new System.Drawing.Size(75, 23);
+            this.buttonOpen.Size = new System.Drawing.Size(102, 23);
             this.buttonOpen.TabIndex = 11;
             this.buttonOpen.Text = "OPEN";
             this.toolTip1.SetToolTip(this.buttonOpen, "Open a .dat file");
@@ -168,9 +168,9 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(284, 357);
+            this.buttonSave.Location = new System.Drawing.Point(273, 346);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.Size = new System.Drawing.Size(110, 23);
             this.buttonSave.TabIndex = 12;
             this.buttonSave.Text = "SAVE";
             this.toolTip1.SetToolTip(this.buttonSave, "Save data to a .dat file");
@@ -181,9 +181,9 @@
             // 
             this.stripStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.stripStatus.Location = new System.Drawing.Point(0, 396);
+            this.stripStatus.Location = new System.Drawing.Point(0, 386);
             this.stripStatus.Name = "stripStatus";
-            this.stripStatus.Size = new System.Drawing.Size(411, 22);
+            this.stripStatus.Size = new System.Drawing.Size(404, 22);
             this.stripStatus.TabIndex = 13;
             this.stripStatus.Text = "-";
             // 
@@ -201,6 +201,7 @@
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "Name";
+            this.toolTip1.SetToolTip(this.label3, "Double-click to clear");
             // 
             // label4
             // 
@@ -210,6 +211,7 @@
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 16;
             this.label4.Text = "Category";
+            this.toolTip1.SetToolTip(this.label4, "Double-click to clear");
             // 
             // label5
             // 
@@ -219,6 +221,7 @@
             this.label5.Size = new System.Drawing.Size(50, 13);
             this.label5.TabIndex = 17;
             this.label5.Text = "Structure";
+            this.toolTip1.SetToolTip(this.label5, "Double-click to clear");
             // 
             // label6
             // 
@@ -228,12 +231,13 @@
             this.label6.Size = new System.Drawing.Size(51, 13);
             this.label6.TabIndex = 18;
             this.label6.Text = "Definition";
+            this.toolTip1.SetToolTip(this.label6, "Double-click to clear");
             // 
             // buttonSort
             // 
-            this.buttonSort.Location = new System.Drawing.Point(178, 327);
+            this.buttonSort.Location = new System.Drawing.Point(22, 346);
             this.buttonSort.Name = "buttonSort";
-            this.buttonSort.Size = new System.Drawing.Size(75, 23);
+            this.buttonSort.Size = new System.Drawing.Size(112, 23);
             this.buttonSort.TabIndex = 19;
             this.buttonSort.Text = "SORT";
             this.toolTip1.SetToolTip(this.buttonSort, "Sort the data by Name ascending");
@@ -252,7 +256,7 @@
             this.listViewArray.TabIndex = 21;
             this.listViewArray.UseCompatibleStateImageBehavior = false;
             this.listViewArray.View = System.Windows.Forms.View.Details;
-            this.listViewArray.SelectedIndexChanged += new System.EventHandler(this.listViewArray_SelectedIndexChanged);
+            this.listViewArray.Click += new System.EventHandler(this.listViewArray_Click);
             // 
             // columnHeaderName
             // 
@@ -268,7 +272,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 418);
+            this.ClientSize = new System.Drawing.Size(404, 408);
             this.Controls.Add(this.listViewArray);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.label6);
@@ -290,6 +294,7 @@
             this.Controls.Add(this.textBoxSearch);
             this.Name = "DataStructureWiki";
             this.Text = "Data Structure Wiki";
+            this.Load += new System.EventHandler(this.DataStructureWiki_Load);
             this.stripStatus.ResumeLayout(false);
             this.stripStatus.PerformLayout();
             this.ResumeLayout(false);
