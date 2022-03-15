@@ -100,14 +100,11 @@ namespace CSharp2Assessment1
                     if (delChoice == DialogResult.Yes)
                     {
                         int index = listViewArray.SelectedIndices[0];
+                        // Using swap function to move selected item to end of array then
+                        // decrementing nextEmptyRow and redisplaying list to 'delete' element
                         while (index < nextEmptyRow - 1)
-                        {
-                            for (int k = 0; k < colSize; k++)
-                            {
-                                // Using swap function to move selected item to end of array then
-                                // decrementing nextEmptyRow and redisplaying list to 'delete' element
-                                Swap(myArray, index + 1, index, k);
-                            }
+                        {   
+                            Swap(index + 1, index);
                             index++;
                         }
                         nextEmptyRow--;
@@ -131,18 +128,22 @@ namespace CSharp2Assessment1
         private void textBoxName_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ClearTextBoxes();
+            ResetColours();
         }
         private void textBoxCategory_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ClearTextBoxes();
+            ResetColours();
         }
         private void textBoxStructure_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ClearTextBoxes();
+            ResetColours();
         }
         private void textBoxDefinition_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ClearTextBoxes();
+            ResetColours();
         }
         private void ClearTextBoxes()
         {
@@ -157,6 +158,7 @@ namespace CSharp2Assessment1
         private void textBoxSearch_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             textBoxSearch.Clear();
+            ResetColours();
         }
         #endregion CLEAR
 
@@ -178,10 +180,7 @@ namespace CSharp2Assessment1
                 {
                     if (string.Compare(myArray[i, 0], myArray[j, 0]) > 0)
                     {
-                        for (int k = 0; k < colSize; k++)
-                        {
-                            Swap(myArray, i, j, k);
-                        }
+                        Swap(i, j);
                     }
                 }
             }
@@ -189,15 +188,19 @@ namespace CSharp2Assessment1
             toolStripStatusLabel.Text = "Data sorted by Name ascending";
         }
 
-        // Swap function creates a temp 2D array, for loop iterates through all four columns
+        // Swap function creates a temp array, for loop iterates through all four columns
         // of data swapping each element
-        public void Swap(string[,] x, int a, int b, int k)
+        public void Swap(int a, int b)
         {
-            string[,] temp = new string[1, colSize];
-            temp[0, k] = x[a, k];
-            x[a, k] = x[b, k];
-            x[b, k] = temp[0, k];
+            string[] temp = new string[colSize];
+            for (int i = 0; i < colSize; i++)
+            {
+                temp[i] = myArray[a, i];
+                myArray[a, i] = myArray[b, i];
+                myArray[b, i] = temp[i];
+            }
         }
+
         #endregion SORT
 
         // Q8.5 A Binary Search method for the Name in the 2D array, displaying information
@@ -236,7 +239,8 @@ namespace CSharp2Assessment1
                     if (found)
                     {
                         toolStripStatusLabel.Text = "Search target \"" + target + "\" was found";
-                        listViewArray.SelectedIndices.Add(mid);
+                        listViewArray.Items[mid].BackColor = Color.Blue;
+                        listViewArray.Items[mid].ForeColor = Color.White;
 
                         textBoxName.Text = myArray[mid, 0];
                         textBoxCategory.Text = myArray[mid, 1];
@@ -253,6 +257,7 @@ namespace CSharp2Assessment1
                 toolStripStatusLabel.Text = "Cannot search, array is empty";
             
         }
+
         #endregion SEARCH
 
         // Q8.6 Create a display method that will show the following information
@@ -268,6 +273,14 @@ namespace CSharp2Assessment1
                 listViewArray.Items.Add(lvi);
             }
         }
+        public void ResetColours()
+        {
+            for (int i = 0; i < nextEmptyRow - 1; i++)
+            {
+                listViewArray.Items[i].BackColor = Color.White;
+                listViewArray.Items[i].ForeColor = Color.Black;
+            }
+        }
         #endregion DISPLAY
 
         // Q8.7	Create a method so the user can select a definition(Name) from the Listbox
@@ -275,6 +288,7 @@ namespace CSharp2Assessment1
         #region SELECT
         private void listViewArray_Click(object sender, EventArgs e)
         {
+            ResetColours();
             int index = listViewArray.SelectedIndices[0];
             textBoxName.Text = myArray[index, 0].ToString();
             textBoxCategory.Text = myArray[index, 1].ToString();
