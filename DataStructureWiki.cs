@@ -17,6 +17,9 @@ namespace CSharp2Assessment1
      * James Boyd 30041547
      * C Sharp 2 Assignment AT01
      * Data Structure Wiki
+     * A Forms app that stores information about various data structures
+     * in a 2D Array, allowing the user to Add, Edit or Delete entries, 
+     * search for an item, save the data to or load from a .dat file.
      */
     public partial class DataStructureWiki : Form
     {
