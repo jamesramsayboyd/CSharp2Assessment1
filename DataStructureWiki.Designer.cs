@@ -61,7 +61,6 @@
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(111, 20);
             this.textBoxSearch.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.textBoxSearch, "Double-click to clear");
             this.textBoxSearch.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSearch_MouseDoubleClick);
             // 
             // buttonSearch
@@ -71,7 +70,6 @@
             this.buttonSearch.Size = new System.Drawing.Size(75, 23);
             this.buttonSearch.TabIndex = 1;
             this.buttonSearch.Text = "SEARCH";
-            this.toolTip1.SetToolTip(this.buttonSearch, "Enter a data structure name in the textbox to search");
             this.buttonSearch.UseVisualStyleBackColor = true;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
@@ -82,7 +80,6 @@
             this.buttonAdd.Size = new System.Drawing.Size(112, 23);
             this.buttonAdd.TabIndex = 2;
             this.buttonAdd.Text = "ADD";
-            this.toolTip1.SetToolTip(this.buttonAdd, "Add data in all four textboxes to add it to the array");
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
@@ -93,7 +90,6 @@
             this.buttonEdit.Size = new System.Drawing.Size(102, 23);
             this.buttonEdit.TabIndex = 3;
             this.buttonEdit.Text = "EDIT";
-            this.toolTip1.SetToolTip(this.buttonEdit, "Select an item from the array to edit its data");
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
@@ -104,7 +100,6 @@
             this.buttonDelete.Size = new System.Drawing.Size(110, 23);
             this.buttonDelete.TabIndex = 4;
             this.buttonDelete.Text = "DELETE";
-            this.toolTip1.SetToolTip(this.buttonDelete, "Select an item from the array to delete it");
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
@@ -115,7 +110,6 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(137, 20);
             this.textBoxName.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.textBoxName, "Double-click to clear");
             this.textBoxName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxName_MouseDoubleClick);
             // 
             // textBoxCategory
@@ -124,7 +118,6 @@
             this.textBoxCategory.Name = "textBoxCategory";
             this.textBoxCategory.Size = new System.Drawing.Size(137, 20);
             this.textBoxCategory.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.textBoxCategory, "Double-click to clear");
             this.textBoxCategory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxCategory_MouseDoubleClick);
             // 
             // textBoxStructure
@@ -133,7 +126,6 @@
             this.textBoxStructure.Name = "textBoxStructure";
             this.textBoxStructure.Size = new System.Drawing.Size(137, 20);
             this.textBoxStructure.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.textBoxStructure, "Double-click to clear");
             this.textBoxStructure.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxStructure_MouseDoubleClick);
             // 
             // textBoxDefinition
@@ -144,7 +136,6 @@
             this.textBoxDefinition.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxDefinition.Size = new System.Drawing.Size(137, 124);
             this.textBoxDefinition.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.textBoxDefinition, "Double-click to clear");
             this.textBoxDefinition.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxDefinition_MouseDoubleClick);
             // 
             // label1
@@ -163,7 +154,6 @@
             this.buttonOpen.Size = new System.Drawing.Size(102, 23);
             this.buttonOpen.TabIndex = 11;
             this.buttonOpen.Text = "OPEN";
-            this.toolTip1.SetToolTip(this.buttonOpen, "Open a .dat file");
             this.buttonOpen.UseVisualStyleBackColor = true;
             this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
@@ -174,7 +164,6 @@
             this.buttonSave.Size = new System.Drawing.Size(110, 23);
             this.buttonSave.TabIndex = 12;
             this.buttonSave.Text = "SAVE";
-            this.toolTip1.SetToolTip(this.buttonSave, "Save data to a .dat file");
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -241,7 +230,6 @@
             this.buttonSort.Size = new System.Drawing.Size(112, 23);
             this.buttonSort.TabIndex = 19;
             this.buttonSort.Text = "SORT";
-            this.toolTip1.SetToolTip(this.buttonSort, "Sort the data by Name ascending");
             this.buttonSort.UseVisualStyleBackColor = true;
             this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 

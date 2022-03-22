@@ -33,6 +33,7 @@ namespace CSharp2Assessment1
         public DataStructureWiki()
         {
             InitializeComponent();
+            SetToolTips();
         }
 
         // Q8.2 Create ADD, EDIT and DELETE buttons that will store the information
@@ -41,11 +42,13 @@ namespace CSharp2Assessment1
         #region ADD EDIT DELETE
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            // All four textboxes must contain information to add a new entry
             if (!string.IsNullOrEmpty(textBoxName.Text) && 
                 !string.IsNullOrEmpty(textBoxCategory.Text) &&
                 !string.IsNullOrEmpty(textBoxStructure.Text) && 
                 !string.IsNullOrEmpty(textBoxDefinition.Text))
             {
+                // Checks to see whether array is already full
                 if (nextEmptyRow < rowSize)
                 {
                     myArray[nextEmptyRow, 0] = textBoxName.Text;
@@ -103,6 +106,11 @@ namespace CSharp2Assessment1
                     if (delChoice == DialogResult.Yes)
                     {
                         int index = listViewArray.SelectedIndices[0];
+                        myArray[index, 0] = "";
+                        myArray[index, 1] = "";
+                        myArray[index, 2] = "";
+                        myArray[index, 3] = "";
+
                         // Using swap function to move selected item to end of array then
                         // decrementing nextEmptyRow and redisplaying list to 'delete' element
                         while (index < nextEmptyRow - 1)
@@ -215,7 +223,7 @@ namespace CSharp2Assessment1
             {
                 if (!string.IsNullOrEmpty(textBoxSearch.Text))
                 {
-                    BubbleSort();
+                    BubbleSort(); // Data is sorted before Binary Search
                     string target = textBoxSearch.Text;
                     int upperBound = nextEmptyRow - 1; ;
                     int lowerBound = 0;
@@ -276,17 +284,34 @@ namespace CSharp2Assessment1
                 listViewArray.Items.Add(lvi);
             }
         }
+        // Method to reset colours of Listview after Binary Search method highlights a row
         public void ResetColours()
         {
-            for (int i = 0; i < nextEmptyRow - 1; i++)
+            for (int i = 0; i < nextEmptyRow; i++)
             {
                 listViewArray.Items[i].BackColor = Color.White;
                 listViewArray.Items[i].ForeColor = Color.Black;
             }
         }
+        
+        public void SetToolTips()
+        {
+            toolTip1.SetToolTip(buttonAdd, "Enter data in all four textboxes to add it to the array");
+            toolTip1.SetToolTip(buttonEdit, "Select an item from the array to edit its data");
+            toolTip1.SetToolTip(buttonDelete, "Select an item from the array to delete it");
+            toolTip1.SetToolTip(buttonSort, "Sort the data by Name ascending");
+            toolTip1.SetToolTip(buttonOpen, "Open a .dat file");
+            toolTip1.SetToolTip(buttonSave, "Save data to a .dat file");
+            toolTip1.SetToolTip(buttonSearch, "Enter a data structure name in the textbox to search");
+            toolTip1.SetToolTip(textBoxName, "Double-click to clear");
+            toolTip1.SetToolTip(textBoxCategory, "Double-click to clear");
+            toolTip1.SetToolTip(textBoxStructure, "Double-click to clear");
+            toolTip1.SetToolTip(textBoxDefinition, "Double-click to clear");
+            toolTip1.SetToolTip(textBoxSearch, "Double-click to clear");
+        }
         #endregion DISPLAY
 
-        // Q8.7	Create a method so the user can select a definition(Name) from the Listbox
+        // Q8.7	Create a method so the user can select a definition (Name) from the Listbox
         // and all the information is displayed in the appropriate Textboxes,
         #region SELECT
         private void listViewArray_Click(object sender, EventArgs e)
@@ -378,7 +403,7 @@ namespace CSharp2Assessment1
             DisplayArray();
         }
 
-        // If the user manually loads a .dat file, the nextEmptyRow pointer is reset to 0
+        // When the user manually loads a .dat file, the nextEmptyRow pointer is reset to 0
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             nextEmptyRow = 0;
